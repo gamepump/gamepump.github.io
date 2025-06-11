@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>XO Game</title>
+    <title>TicTacPump</title>
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             text-align: center;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
         }
         .board {
             display: grid;
@@ -24,39 +28,22 @@
             justify-content: center;
             cursor: pointer;
         }
-        #popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background: white;
-            border: 2px solid #000;
-            z-index: 100;
+        .cell:hover {
+            background-color: #f0f0f0;
+        }
+        #status {
+            margin: 20px;
+            font-size: 24px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>XO Game</h1>
-    <div class="board" id="board">
-        <!-- Cells will be added by JavaScript -->
-    </div>
+    <h1>TicTacPump</h1>
+    <div id="status">Player X's turn</div>
+    <div class="board" id="board"></div>
+    <button id="reset" style="padding: 10px 20px; font-size: 16px;">Reset Game</button>
 
-    <!-- POPUP (Add your JPG here) -->
-    <div id="popup">
-        <img src="your-popup.jpg" alt="Popup Image" width="200"> <!-- Replace with your JPG -->
-        <button onclick="closePopup()">Close</button>
-    </div>
-
-    <!-- ICON (Add favicon) -->
-    <link rel="icon" href="icon.jpg" type="image/jpg"> <!-- Replace with your icon JPG -->
-
-    <script>
-        // Game logic will go here
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-        }
-    </script>
+    <script src="game.js"></script>
 </body>
 </html>
