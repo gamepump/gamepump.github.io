@@ -9,13 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
         [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
         [0, 4, 8], [2, 4, 6]             // diagonals
     ];
+    const humanPlayer = 'X';
+    const computerPlayer = 'O';
 
     // Initialize the game board
     function initializeBoard() {
         board.innerHTML = '';
         gameState = ['', '', '', '', '', '', '', '', ''];
-        currentPlayer = 'X';
-        status.textContent = `Player ${currentPlayer}'s turn`;
+        currentPlayer = humanPlayer;
+        status.textContent = `Your turn (${humanPlayer})`;
 
         for (let i = 0; i < 9; i++) {
             const cell = document.createElement('div');
@@ -26,23 +28,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Handle cell clicks
+    // Handle human player's move
     function handleCellClick(e) {
+        if (currentPlayer !== humanPlayer || !isGameActive()) return;
+
         const clickedCell = e.target;
         const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
 
-        if (gameState[clickedCellIndex] !== '' || !isGameActive()) {
-            return;
-        }
+        if (gameState[clickedCellIndex] !== '') return;
 
-        updateCell(clickedCell, clickedCellIndex);
-        checkResult();
+        makeMove(clickedCell, clickedCellIndex, humanPlayer);
+        
+        if (!checkResult() && isGameActive()) {
+            currentPlayer = computerPlayer;
+            status.textContent = "Computer thinking...";
+            setTimeout(computerMove, 500); // Delay for better UX
+        }
     }
 
-    // Update a cell's state
-    function updateCell(cell, index) {
-        gameState[index] = currentPlayer;
-        cell.textContent = currentPlayer;
+    // Computer makes a random move
+    function computerMove() {
+        if (!isGameActive()) return;
+
+        const emptyCells = gameState
+            .map((cell, index) => cell === '' ? index : null)
+            .filter(val => val !== null);
+
+        if (emptyCells.length > 0) {
+            const randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            const cell = document.querySelector(`.cell[data-index="${randomIndex}"]`);
+            makeMove(cell, randomIndex, computerPlayer);
+            checkResult();
+        }
+
+        currentPlayer = humanPlayer;
+        status.textContent = `Your turn (${humanPlayer})`;
+    }
+
+    // Make a move (human or computer)
+    function makeMove(cell, index, player) {
+        gameState[index] = player;
+        cell.textContent = player;
     }
 
     // Check for win or draw
@@ -61,17 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (roundWon) {
-            status.textContent = `Player ${currentPlayer} wins!`;
-            return;
+            const winner = currentPlayer === humanPlayer ? 'You win!' : 'Computer wins!';
+            status.textContent = winner;
+            return true;
         }
 
         if (!gameState.includes('')) {
             status.textContent = 'Game ended in a draw!';
-            return;
+            return true;
         }
 
-        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-        status.textContent = `Player ${currentPlayer}'s turn`;
+        return false;
     }
 
     // Check if game is still active
