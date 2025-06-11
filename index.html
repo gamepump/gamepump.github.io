@@ -36,14 +36,20 @@
             font-size: 24px;
             font-weight: bold;
         }
+        #reset {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1>TicTacPump</h1>
-    <div id="status">Player X's turn</div>
+    <div id="status">Your turn (X)</div>
     <div class="board" id="board"></div>
-    <button id="reset" style="padding: 10px 20px; font-size: 16px;">Reset Game</button>
+    <button id="reset">Reset Game</button>
 
+    <!-- Change this line to point to game.js -->
     <script src="game.js"></script>
 </body>
 </html>
