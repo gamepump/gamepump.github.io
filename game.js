@@ -5,20 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPlayer = 'X';
     let gameState = ['', '', '', '', '', '', '', '', ''];
     const winningConditions = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-        [0, 4, 8], [2, 4, 6]             // diagonals
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
     ];
     const humanPlayer = 'X';
     const computerPlayer = 'O';
+    let gameActive = true;
 
-    // Initialize the game board
-    function initializeBoard() {
+    // Initialize game
+    function initGame() {
         board.innerHTML = '';
         gameState = ['', '', '', '', '', '', '', '', ''];
         currentPlayer = humanPlayer;
+        gameActive = true;
         status.textContent = `Your turn (${humanPlayer})`;
 
+        // Create cells
         for (let i = 0; i < 9; i++) {
             const cell = document.createElement('div');
             cell.className = 'cell';
@@ -28,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Handle human player's move
+    // Handle human move
     function handleCellClick(e) {
-        if (currentPlayer !== humanPlayer || !isGameActive()) return;
+        if (!gameActive || currentPlayer !== humanPlayer) return;
 
         const clickedCell = e.target;
         const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
@@ -39,60 +42,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
         makeMove(clickedCell, clickedCellIndex, humanPlayer);
         
-        if (!checkResult() && isGameActive()) {
+        if (!checkGameOver()) {
             currentPlayer = computerPlayer;
-            status.textContent = "Computer thinking...";
-            setTimeout(computerMove, 500); // Delay for better UX
+            status.textContent = "Computer's turn...";
+            setTimeout(computerMove, 500);
         }
     }
 
-    // Computer makes a random move
+    // Computer move logic
     function computerMove() {
-        if (!isGameActive()) return;
+        if (!gameActive) return;
 
-        const emptyCells = gameState
-            .map((cell, index) => cell === '' ? index : null)
-            .filter(val => val !== null);
+        // Find all empty cells
+        const emptyCells = [];
+        for (let i = 0; i < gameState.length; i++) {
+            if (gameState[i] === '') {
+                emptyCells.push(i);
+            }
+        }
 
+        // Make random move if available
         if (emptyCells.length > 0) {
             const randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-            const cell = document.querySelector(`.cell[data-index="${randomIndex}"]`);
+            const cell = document.querySelector(`[data-index="${randomIndex}"]`);
             makeMove(cell, randomIndex, computerPlayer);
-            checkResult();
+            checkGameOver();
         }
 
         currentPlayer = humanPlayer;
         status.textContent = `Your turn (${humanPlayer})`;
     }
 
-    // Make a move (human or computer)
+    // Make a move
     function makeMove(cell, index, player) {
         gameState[index] = player;
         cell.textContent = player;
     }
 
-    // Check for win or draw
-    function checkResult() {
-        let roundWon = false;
-        
+    // Check for win/draw
+    function checkGameOver() {
+        // Check win
         for (let i = 0; i < winningConditions.length; i++) {
             const [a, b, c] = winningConditions[i];
-            if (gameState[a] === '' || gameState[b] === '' || gameState[c] === '') {
-                continue;
-            }
-            if (gameState[a] === gameState[b] && gameState[b] === gameState[c]) {
-                roundWon = true;
-                break;
+            if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+                gameActive = false;
+                status.textContent = gameState[a] === humanPlayer ? 'You win!' : 'Computer wins!';
+                return true;
             }
         }
 
-        if (roundWon) {
-            const winner = currentPlayer === humanPlayer ? 'You win!' : 'Computer wins!';
-            status.textContent = winner;
-            return true;
-        }
-
+        // Check draw
         if (!gameState.includes('')) {
+            gameActive = false;
             status.textContent = 'Game ended in a draw!';
             return true;
         }
@@ -100,14 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     }
 
-    // Check if game is still active
-    function isGameActive() {
-        return !status.textContent.includes('wins') && !status.textContent.includes('draw');
-    }
-
     // Reset game
-    resetButton.addEventListener('click', initializeBoard);
+    resetButton.addEventListener('click', initGame);
 
     // Start the game
-    initializeBoard();
+    initGame();
 });
