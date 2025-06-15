@@ -1,0 +1,99 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0d1117;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #f2a900; /* crypto gold */
+}
+
+#icon-picker {
+  margin-bottom: 20px;
+}
+
+#icon-picker button {
+  background: none;
+  border: 2px solid #fff;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#icon-picker button:hover {
+  transform: scale(1.1);
+  border-color: #f2a900;
+}
+
+#icon-picker img {
+  width: 40px;
+  height: 40px;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 10px;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  background-color: #161b22;
+  border: 2px solid #30363d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.cell img {
+  max-width: 70%;
+  max-height: 70%;
+}
+
+#meme-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #222;
+  border: 3px solid #f2a900;
+  padding: 20px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+}
+
+#meme-popup img {
+  max-width: 300px;
+  max-height: 300px;
+  margin-bottom: 10px;
+}
+
+#meme-popup button {
+  padding: 10px 20px;
+  background-color: #f2a900;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
