@@ -20,6 +20,11 @@
       text-shadow: 0 0 10px #ff3300;
     }
 
+    p {
+      font-size: 1.2rem;
+      color: #ddd;
+    }
+
     .menu {
       display: flex;
       flex-wrap: wrap;
@@ -36,7 +41,7 @@
       width: 200px;
       text-decoration: none;
       color: #fff;
-      transition: transform 0.2s;
+      transition: transform 0.2s, background-color 0.2s;
     }
 
     .game-card:hover {
@@ -67,19 +72,25 @@
   <p>Select a crypto-themed game below to play!</p>
 
   <div class="menu">
-    <a href="tictacpump.html" class="game-card">
+    <!-- TicTacPump Game Link -->
+    <a href="tictacpump/tictacpump.html" class="game-card">
       <img src="assets/icons/btc.png" alt="TicTacPump" />
       <h2>TicTacPump</h2>
     </a>
 
-    <a href="dumpybird.html" class="game-card">
+    <!-- DumpyBird Game Link -->
+    <a href="dumpybird/dumpybird.html" class="game-card">
       <img src="assets/icons/doge.png" alt="DumpyBird" />
       <h2>DumpyBird (Coming Soon)</h2>
     </a>
+
+    <!-- Future Game Placeholder -->
+    <a href="#" class="game-card" style="opacity: 0.5; pointer-events: none;">
+      <img src="assets/icons/eth.png" alt="Coming Soon" />
+      <h2>More Games Soon...</h2>
+    </a>
   </div>
 
-  <footer>🚀 Hosted on GitHub Pages</footer>
+  <footer>🚀 Hosted on GitHub Pages | GamePump © 2025</footer>
 </body>
 </html>
-
-
