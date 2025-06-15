@@ -2,22 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TicTacPump</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tictacpump.css" />
 </head>
 <body>
-  <h1>TicTacPump</h1>
-
-  <!-- Crypto Icon Picker -->
-  <div id="icon-picker">
-    <p>Choose your crypto icon:</p>
-    <button data-icon="btc"><img src="assets/icons/btc.png" alt="BTC" /></button>
-    <button data-icon="eth"><img src="assets/icons/eth.png" alt="ETH" /></button>
-    <button data-icon="doge"><img src="assets/icons/doge.png" alt="DOGE" /></button>
-  </div>
-
-  <!-- Game Board -->
+  <h1>TicTacPump 🔥</h1>
   <div id="game-board">
     <div class="cell" data-index="0"></div>
     <div class="cell" data-index="1"></div>
@@ -29,13 +19,9 @@
     <div class="cell" data-index="7"></div>
     <div class="cell" data-index="8"></div>
   </div>
+  <div id="status"></div>
+  <button id="reset-btn">Reset Game</button>
 
-  <!-- Meme Popup -->
-  <div id="meme-popup" class="hidden">
-    <img id="meme-img" src="" alt="Crypto Meme" />
-    <button onclick="closeMeme()">Close</button>
-  </div>
-
-  <script src="script.js"></script>
+  <script src="tictacpump.js"></script>
 </body>
 </html>
