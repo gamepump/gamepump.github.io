@@ -42,6 +42,11 @@ h1 {
 .cell:hover {
   background-color: #660000;
 }
+.cell img.icon {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
 
 button {
   padding: 10px 20px;
