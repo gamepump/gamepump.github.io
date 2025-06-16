@@ -8,7 +8,7 @@ const bird = {
   y: 150,
   width: 30,
   height: 25,
-  gravity: 0.6,
+  gravity: 0.2,
   lift: -10,
   velocity: 0
 };
