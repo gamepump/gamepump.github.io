@@ -48,7 +48,20 @@ p {
   text-align: center;
   color: #eee;
   text-decoration: none;
-  transition: transform 0.25s ease, box-sha
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px #aaaaffee;
+}
+
+.game-card img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
 /* Home icon fixed at top-left */
 .home-link {
   position: fixed;
@@ -71,3 +84,4 @@ p {
 .home-link:hover img {
   filter: drop-shadow(0 0 6px #ff4c4c);
 }
+
