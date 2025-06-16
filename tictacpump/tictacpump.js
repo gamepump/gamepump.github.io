@@ -37,13 +37,20 @@ board.addEventListener("click", (e) => {
 function makeMove(index, player) {
   cells[index] = player;
   const cell = board.querySelector(`[data-index='${index}']`);
-  cell.textContent = player;
+
+  const img = document.createElement("img");
+  img.src = player === "O" ? "assets/icons/btc.png" : "assets/icons/doge.png";
+  img.alt = player;
+  img.classList.add("icon");
+
+  cell.innerHTML = ""; // Clear previous
+  cell.appendChild(img);
 }
 
 function computerMove() {
   if (!gameActive) return;
 
-  const difficulty = document.getElementById("difficulty").value;
+  const difficulty = document.getElementById("difficulty")?.value || "hard";
   let move;
 
   if (difficulty === "easy") {
@@ -136,6 +143,5 @@ resetBtn.addEventListener("click", () => {
   cells = Array(9).fill(null);
   gameActive = true;
   status.textContent = "Your Turn (O)";
-  board.querySelectorAll(".cell").forEach(c => c.textContent = "");
+  board.querySelectorAll(".cell").forEach(c => c.innerHTML = "");
 });
-
