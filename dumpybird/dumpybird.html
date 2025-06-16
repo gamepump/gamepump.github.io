@@ -3,17 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DumpyBird</title>
+  <title>DumpyBird - Crypto Flappy Bird</title>
   <link rel="stylesheet" href="dumpybird.css" />
+  <script src="dumpybird.js" defer></script>
 </head>
 <body>
-  <h1>DumpyBird 🐦</h1>
-  <div id="game-container">
-    <canvas id="gameCanvas" width="320" height="480"></canvas>
-  </div>
-  <div id="score">Score: 0</div>
-  <button id="restart-btn">Restart</button>
+  <!-- Home icon link -->
+  <a href="index.html" class="home-link" title="Return to Home">
+    <img src="assets/icons/home.png" alt="Home" />
+  </a>
 
-  <script src="dumpybird.js"></script>
+  <h1>DumpyBird</h1>
+  <canvas id="gameCanvas" width="320" height="480"></canvas>
+  <div id="score">Score: 0</div>
+  <button id="resetBtn">Restart</button>
 </body>
 </html>
+
